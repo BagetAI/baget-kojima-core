@@ -44,6 +44,31 @@
                     <p class="text-lg mb-6">
                         Japanese denim sizing is notoriously difficult. A size 32 from Momotaro isn't a size 32 from Levi's. We spent 12 months mapping 50+ US brands to Japanese mill measurements.
                     </p>
+                    
+                    <!-- Fit-to-Fade Calculator -->
+                    <div class="calculator border-4 border-black p-6 bg-white shadow-hard mb-12">
+                        <h3 class="font-bold uppercase mb-4 text-accent">Fit-to-Fade Calculator</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block font-bold text-xs uppercase mb-1">Your Current Favorite Brand</label>
+                                <select id="calc-brand" class="w-full border-2 border-black p-2 font-mono text-sm">
+                                    <option value="">Loading Brands...</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block font-bold text-xs uppercase mb-1">Vanity Waist Size (on tag)</label>
+                                <input type="number" id="calc-waist" value="32" class="w-full border-2 border-black p-2 font-mono text-sm">
+                            </div>
+                            <button id="run-calc" class="w-full bg-black text-white font-bold uppercase py-2 hover:bg-accent transition-colors">
+                                Calculate Match &rarr;
+                            </button>
+                        </div>
+                        <div id="calc-result" class="mt-4 p-3 border-2 border-dashed border-black hidden">
+                            <p class="text-xs uppercase opacity-60">Your Kojima Core Match:</p>
+                            <p id="match-text" class="text-xl font-bold text-accent font-mono"></p>
+                        </div>
+                    </div>
+
                     <ul class="space-y-4 font-mono">
                         <li class="flex items-start">
                             <span class="bg-black text-white px-2 mr-3 font-bold">1</span>
@@ -60,34 +85,22 @@
                     </ul>
                 </div>
                 <div class="border-4 border-black p-8 shadow-hard bg-[#FFFCE1]">
-                    <h3 class="font-bold uppercase mb-4 border-b-2 border-black pb-2">Sample Mapping</h3>
-                    <table class="w-full text-left font-mono text-sm">
-                        <thead>
-                            <tr class="border-b border-black">
-                                <th class="py-2">US Brand/Fit</th>
-                                <th class="py-2">US Size</th>
-                                <th class="py-2">Kojima Match</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b border-black">
-                                <td class="py-2">Levi's 501 ST</td>
-                                <td class="py-2">32</td>
-                                <td class="py-2 font-bold">JB J304 (34)</td>
-                            </tr>
-                            <tr class="border-b border-black">
-                                <td class="py-2">J.Crew 770</td>
-                                <td class="py-2">31</td>
-                                <td class="py-2 font-bold">Momo 0405 (32)</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2">Bonobos Straight</td>
-                                <td class="py-2">34</td>
-                                <td class="py-2 font-bold">JB Circle (36)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p class="mt-4 text-xs italic">*Based on actual waistband and thigh measurements, not vanity labels.</p>
+                    <h3 class="font-bold uppercase mb-4 border-b-2 border-black pb-2">Fit-to-Fade Engine Index</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left font-mono text-sm" id="mapping-table">
+                            <thead>
+                                <tr class="border-b border-black">
+                                    <th class="py-2">US Brand/Fit</th>
+                                    <th class="py-2">US Size</th>
+                                    <th class="py-2">Kojima Match</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Populated by script.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="mt-4 text-xs italic">*Real-time data synced from the Kojima Mill Database.</p>
                 </div>
             </div>
         </div>
