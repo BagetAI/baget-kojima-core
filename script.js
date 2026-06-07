@@ -1,4 +1,4 @@
-const WAITLIST_DB_ID = '53df97c4-6db2-4c70-a39b-3e7064fb7cf2';
+const WAITLIST_DB_ID = 'f5d9abbb-8d6c-4f80-bccb-594b48d91cbf';
 const MAPPINGS_DB_ID = 'a9ec2361-179b-4d29-ae94-879a8966b56e';
 
 // Master list of physical-to-vanity sizing mappings to ensure robust 50-row backup data
@@ -38,11 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             
             const formData = new FormData(form);
-            const data = {
+            const payload = {
                 name: formData.get('name'),
                 email: formData.get('email'),
-                levis_size: formData.get('levis_size'),
-                preferred_fit: formData.get('preferred_fit')
+                target_brand: formData.get('levis_size'),
+                target_size: formData.get('preferred_fit')
             };
 
             const submitBtn = form.querySelector('button');
@@ -51,22 +51,24 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
 
             try {
-                const response = await fetch(`https://app.baget.ai/api/public/databases/${WAITLIST_DB_ID}/rows`, {
+                const response = await fetch('/api/waitlist', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ data })
+                    body: JSON.stringify(payload)
                 });
 
+                const result = await response.json();
+
                 if (response.ok) {
-                    feedback.innerText = 'SUCCESS. You are on the list. Welcome to the mill.';
+                    feedback.innerText = result.message || 'SUCCESS. You are on the list. Welcome to the mill.';
                     feedback.className = 'mt-4 font-bold text-center text-green-600 block';
                     form.reset();
                     updateCount();
                 } else {
-                    throw new Error('Transmission failed.');
+                    throw new Error(result.error || 'Transmission failed.');
                 }
             } catch (err) {
-                feedback.innerText = 'ERROR. Something went wrong. Try again.';
+                feedback.innerText = err.message || 'ERROR. Something went wrong. Try again.';
                 feedback.className = 'mt-4 font-bold text-center text-red-600 block';
             } finally {
                 submitBtn.innerText = originalText;
