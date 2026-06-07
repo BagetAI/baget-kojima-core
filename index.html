@@ -8,26 +8,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
+    <!-- React and ReactDOM from CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 </head>
 <body>
     <nav class="border-b">
         <div class="container flex justify-between items-center py-4">
             <div class="logo font-bold text-2xl uppercase">Kojima Core</div>
             <div class="nav-links hidden md-flex">
-                <a href="#fit-to-fade" class="px-4">Fit-to-Fade</a>
-                <a href="#survey" class="px-4 border-2 border-black shadow-hard bg-accent text-white py-1">Join Waitlist</a>
+                <a href="#fit-to-fade" class="px-4 font-mono uppercase text-sm">Fit-to-Fade</a>
+                <a href="#survey" class="px-4 border-2 border-black shadow-hard bg-accent text-white py-1 font-mono uppercase text-sm">Join Waitlist</a>
             </div>
         </div>
     </nav>
 
     <header class="hero container py-12 md-py-20 grid md-grid-cols-2 gap-12 items-center">
         <div class="hero-content">
+            <div class="mb-4 inline-block tab-badge">BATCH 2 PROVENANCE</div>
             <h1 class="text-5xl md-text-7xl font-bold uppercase mb-6 leading-none">Stop Guessing.<br>Start Fading.</h1>
             <p class="text-xl mb-8 leading-relaxed max-w-lg">
-                The only subscription box that maps Japanese artisan denim to your US vanity size. Limited runs from Kojima's finest mills, delivered to your door.
+                The only subscription box that maps Japanese artisan denim to your US vanity size. Limited runs from Kojima's finest mills, delivered to your door with zero-risk sizing.
             </p>
             <div class="cta-group">
-                <a href="#survey" class="btn btn-large mb-4 md-mb-0 inline-block">Secure Early Access</a>
+                <a href="#sizing-calculator-root" class="btn btn-large mb-4 md-mb-0 inline-block">Calibrate Your Fit</a>
             </div>
             <p class="mt-6 font-mono text-sm uppercase">Join <span id="waitlist-count">...</span> founders on the list</p>
         </div>
@@ -42,45 +47,24 @@
                 <div>
                     <h2 class="text-4xl font-bold uppercase mb-8">The "Fit-to-Fade" Solution</h2>
                     <p class="text-lg mb-6">
-                        Japanese denim sizing is notoriously difficult. A size 32 from Momotaro isn't a size 32 from Levi's. We spent 12 months mapping 50+ US brands to Japanese mill measurements.
+                        Japanese denim sizing is notoriously difficult. A size 32 from Momotaro isn't a size 32 from Levi's. We spent 12 months mapping 50+ US brands to Japanese mill measurements to build the definitive Fit-to-Fade engine.
                     </p>
                     
-                    <!-- Fit-to-Fade Calculator -->
-                    <div class="calculator border-4 border-black p-6 bg-white shadow-hard mb-12">
-                        <h3 class="font-bold uppercase mb-4 text-accent">Fit-to-Fade Calculator</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block font-bold text-xs uppercase mb-1">Your Current Favorite Brand</label>
-                                <select id="calc-brand" class="w-full border-2 border-black p-2 font-mono text-sm">
-                                    <option value="">Loading Brands...</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block font-bold text-xs uppercase mb-1">Vanity Waist Size (on tag)</label>
-                                <input type="number" id="calc-waist" value="32" class="w-full border-2 border-black p-2 font-mono text-sm">
-                            </div>
-                            <button id="run-calc" class="w-full bg-black text-white font-bold uppercase py-2 hover:bg-accent transition-colors">
-                                Calculate Match &rarr;
-                            </button>
-                        </div>
-                        <div id="calc-result" class="mt-4 p-3 border-2 border-dashed border-black hidden">
-                            <p class="text-xs uppercase opacity-60">Your Kojima Core Match:</p>
-                            <p id="match-text" class="text-xl font-bold text-accent font-mono"></p>
-                        </div>
-                    </div>
+                    <!-- React Sizing Calculator Mount Point -->
+                    <div id="sizing-calculator-root"></div>
 
-                    <ul class="space-y-4 font-mono">
+                    <ul class="space-y-4 font-mono mt-8">
                         <li class="flex items-start">
                             <span class="bg-black text-white px-2 mr-3 font-bold">1</span>
-                            <span>Tell us your current favorite pair (Levi's, J.Crew, Bonobos).</span>
+                            <span>Select your best-fitting brand & current tag size.</span>
                         </li>
                         <li class="flex items-start">
                             <span class="bg-black text-white px-2 mr-3 font-bold">2</span>
-                            <span>Our "Fit-to-Fade" engine calculates your perfect Kojima match.</span>
+                            <span>Our calibration matrix computes the physical vanity gap instantly.</span>
                         </li>
                         <li class="flex items-start">
                             <span class="bg-black text-white px-2 mr-3 font-bold">3</span>
-                            <span>Receive a "One-Wash" limited run pair that fits perfectly on Day 1.</span>
+                            <span>Secure pre-shrunk One-Wash denim designed to fit on Day 1.</span>
                         </li>
                     </ul>
                 </div>
@@ -96,7 +80,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Populated by script.js -->
+                                <!-- Populated dynamically -->
                             </tbody>
                         </table>
                     </div>
@@ -109,7 +93,7 @@
     <section id="survey" class="py-20 bg-accent text-white">
         <div class="container max-w-2xl text-center">
             <h2 class="text-4xl font-bold uppercase mb-4 text-black bg-white inline-block px-4 shadow-hard">Founder's Circle Survey</h2>
-            <p class="text-xl mb-12">Participate in our sizing study and secure your spot in the 500-unit pilot launch (August 2026).</p>
+            <p class="text-xl mb-12">Participate in our sizing study and secure your spot in the 500-unit pilot launch (September 2026).</p>
             
             <form id="waitlist-form" class="text-left space-y-6">
                 <div class="bg-white p-6 border-4 border-black shadow-hard-white text-black">
@@ -124,7 +108,7 @@
                     <div class="grid md-grid-cols-2 gap-4 mb-4">
                         <div>
                             <label class="block font-bold uppercase mb-2">Favorite US Fit</label>
-                            <select name="levis_size" required class="w-full border-2 border-black p-3 font-mono focus:outline-none focus:bg-[#FFFCE1]">
+                            <select name="levis_size" id="form-levis-size" required class="w-full border-2 border-black p-3 font-mono focus:outline-none focus:bg-[#FFFCE1]">
                                 <option value="">Select Fit...</option>
                                 <option value="levis-501">Levi's 501 (Original)</option>
                                 <option value="levis-511">Levi's 511 (Slim)</option>
@@ -135,7 +119,7 @@
                         </div>
                         <div>
                             <label class="block font-bold uppercase mb-2">Preferred Rise</label>
-                            <select name="preferred_fit" required class="w-full border-2 border-black p-3 font-mono focus:outline-none focus:bg-[#FFFCE1]">
+                            <select name="preferred_fit" id="form-preferred-fit" required class="w-full border-2 border-black p-3 font-mono focus:outline-none focus:bg-[#FFFCE1]">
                                 <option value="">Select Rise...</option>
                                 <option value="high">High Rise (Lifter's Cut)</option>
                                 <option value="mid">Mid Rise (Classic)</option>
@@ -179,9 +163,9 @@
                 &copy; 2026 Kojima Core. Hand-stitched in Japan. Delivered to the World.
             </div>
             <div class="flex space-x-6">
-                <a href="#" class="hover:text-accent">Instagram</a>
-                <a href="#" class="hover:text-accent">Reddit</a>
-                <a href="#" class="hover:text-accent">Contact</a>
+                <a href="#" class="hover:text-accent font-mono">Instagram</a>
+                <a href="#" class="hover:text-accent font-mono">Reddit</a>
+                <a href="#" class="hover:text-accent font-mono">Contact</a>
             </div>
         </div>
     </footer>
